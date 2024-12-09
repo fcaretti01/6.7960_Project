@@ -6,7 +6,9 @@
 <link rel="shortcut icon" href="images/icon.ico">
 <style type="text/css">
 	body {
-		background-color: #f5f9ff;
+      background-color: #f9f9f9;
+      color: #333;
+	  line-height: 2;
 	}
 
 	/* Hide both math displays initially, will display based on JS detection */
@@ -24,7 +26,7 @@
 	}
 	.main-content-block {
 		width: 70%; /* Change this percentage as needed */
-    max-width: 1100px; /* Optional: Maximum width */
+    	max-width: 1100px; /* Optional: Maximum width */
 		background-color:#fff;
 		border-left: 1px solid #DDD;
 		border-right: 1px solid #DDD;
@@ -37,18 +39,33 @@
 			max-width: 130px; /* Optional: Maximum width */
 			position: relative;
 			margin-left: 10px;
-			text-align: left;
-			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;#"Avenir";
+			text-align: center;
+			/* font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;#"Avenir"; */
 			padding: 5px;
 	}
 	.margin-right-block {
-			font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;#"Avenir";
+			/* font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;#"Avenir"; */
 			font-size: 14px;
 			width: 25%; /* Change this percentage as needed */
 			max-width: 256px; /* Optional: Maximum width */
 			position: relative;
 			text-align: left;
 			padding: 10px;  /* Optional: Adds padding inside the caption */
+	}
+
+	/* Metadata Section */
+	.metadata {
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Centers the content vertically */
+    gap: 100px; /* Adds spacing between items */
+    margin-bottom: 20px;
+    font-size: 0.9em;
+    color: #555;
+    text-align: center; /* Ensures text is centered within each item */
+	}
+	.metadata div {
+		text-align: center; /* Centers text inside each metadata section */
 	}
 
 	img {
@@ -88,14 +105,19 @@
 	table.header {
     font-weight: 300;
     font-size: 17px;
+	font-family: Verdana, Geneva, Tahoma, sans-serif;
     flex-grow: 1;
-		width: 70%;
-    max-width: calc(100% - 290px); /* Adjust according to the width of .paper-code-tab */
+	width: 100%;
+    max-width: calc(100% - 290); /* Adjust according to the width of .paper-code-tab */
 	}
 	table td, table td * {
 	    vertical-align: middle;
 	    position: relative;
+		text-align: center;
+		font-weight: bold;
+		line-height: 1.5;
 	}
+
 	table.paper-code-tab {
 	    flex-shrink: 0;
 	    margin-left: 8px;
@@ -183,105 +205,225 @@
 
 </style>
 
-	  <title>The Platonic Representation Hypothesis</title>
-      <meta property="og:title" content="The Platonic Representation Hypothesis" />
+	  <title>caretti_ghitturi_6.7960_final_proj</title>
+      <meta property="og:title" content="Decoding Multi-Head Attention for High-Frequency Financial Forecasting" />
 			<meta charset="UTF-8">
   </head>
 
   <body>
 
-		<div class="content-margin-container">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-						<table class="header" align=left>
-								<tr>
-									<td colspan=4>
-										<span style="font-size: 32px; font-family: 'Courier New', Courier, monospace; /* Adds fallbacks */">A Grand Unified Theory of Deep Learning</span>
-									</td>
-								</tr>
-								<tr>
-										<td align=left>
-												<span style="font-size:17px"><a href="your_website">Your name</a></span>
-										</td>
-										<td align=left>
-												<span style="font-size:17px"><a href="your_partner's_website">Your partner's name</a></span>
-										</td>
-								<tr>
-									<td colspan=4 align=left><span style="font-size:18px">Final project for 6.7960, MIT</span></td>
-								</tr>
-						</table>
-					</div>
-					<div class="margin-right-block">
-					</div>
+	<div class="content-margin-container">
+		<div class="margin-left-block">
 		</div>
+		<div class="main-content-block">
+			<table class="header" align=center>
+					<tr>
+						<td colspan=1>
+							<span style="font-size: 32px; /* Adds fallbacks */">Decoding Multi-Head Attention for Intra-Day Financial Time-Series Forecasting</span>
+						</td>
+					<tr>
+						<td colspan=1 align=center><span style="font-size:18px"><br>Final project for 6.7960, MIT, Fall 2024</span></td>
+					</tr>
+			</table>
+		</div>
+		<div class="margin-right-block">
+		</div>
+		</div>
+	<div class="content-margin-container">
+		<div class="margin-left-block">
+		</div>
+		<div class="main-content-block">
+			<div class="metadata">
+				<!-- Metadata Section -->
+					<div>
+					<h4>Authors</h4>
+					<p>Filippo Caretti</p>
+					<p>Ludovico Ghitturi</p>
+					</div>
+					<div>
+						<h4>emails</h4>
+						<p>fcaretti@mit.edu</p>
+						<p>ludo25@mit.edu</p>
+					</div>
+					<div>
+					<h4>Affiliations</h4>
+					<p>MIT</p>
+					<p>MIT</p>
+					</div>
+				</div>
+		</div>
+		<div class="margin-right-block">
+		</div>	  
+	</div>
 
-		<div class="content-margin-container" id="intro">
-				<div class="margin-left-block">
-          <!-- table of contents here -->
-          <div style="position:fixed; max-width:inherit; top:max(20%,120px)">
-              <b style="font-size:16px">Outline</b><br><br>
-              <a href="#intro">Introduction</a><br><br>
-              <a href="#does_x_do_y">Does X do Y?</a><br><br>
-              <a href="#implications_and_limitations">Implications and limitations</a><br><br>
-          </div>
-				</div>
-		    <div class="main-content-block">
-            <!--You can embed an image like this:-->
-            <img src="./images/your_image_here.png" width=512px/>
-		    </div>
-		    <div class="margin-right-block">
-						Caption for the image.
-		    </div>
+	<div class="content-margin-container" id="intro">
+			<div class="margin-left-block">
+		<!-- table of contents here -->
+		<div style="position:fixed; max-width:inherit; top:max(20%,120px)">
+			<b style="font-size:16px">Outline</b><br><br>
+			<a href="#intro">Introduction</a><br><br>
+			<a href="#background">Background</a><br><br>
+			<a href="#implications_and_limitations">Implications and limitations</a><br><br>
 		</div>
+			</div>
+		<div class="main-content-block">
+		<!--You can embed an image like this:-->
+		<img src="./images/mit_dome.webp" width=512px/>
+		</div>
+		<div class="margin-right-block">
+		</div>
+	</div>
 
     <div class="content-margin-container" id="intro">
 				<div class="margin-left-block">
 				</div>
 		    <div class="main-content-block">
 						<h1>Introduction</h1>
-            Motivate your project. What question are you asking. Why is it unanswered so far? What gap in the literature or practice are you filling?
-            Why is it important?
+						Transformers have demonstrated remarkable predictive capabilities, especially in tasks requiring the identification and prioritization of relevant features through their sophisticated attention mechanisms. Their ability to capture complex dependencies in sequential data has made them a cornerstone in modern machine learning. Despite these successes, the interpretability of transformer-based models remains an open challenge. While these models often produce accurate predictions, the rationale behind their decisions is often opaque, leaving practitioners with limited insights into the factors driving their outputs.
+
+						In this work, we focus on unraveling the decision-making processes of transformers in the context of intraday financial time series prediction. Specifically, we aim to analyze how transformers utilize lagged input features to forecast financial metrics at high-frequency intervals. By examining the internal workings of a GPT-2 small transformer, we seek to mechanistically understand how the architecture implements an autoregressive prediction task in this domain. Our investigation centers on identifying the pathways and components within the model that are most influential in shaping its predictions.
+						
+						To achieve this, we draw inspiration from the systematic approach introduced by Wang et al. (2022), which uses circuit analysis and causal interventions to trace the flow of information within deep learning models. This methodology, known as "path patching," allows for the iterative identification of critical components by intervening on the model's activations and observing the impact on its outputs. By applying this framework to the logits and intermediate activations of GPT-2, we aim to isolate and interpret the contribution of individual model components and layers to the overall prediction.
+						
+						Through this analysis, our goal is to bridge the gap between prediction accuracy and interpretability, offering a more transparent understanding of how transformers process and prioritize input features in a complex financial prediction setting.
 		    </div>
 		    <div class="margin-right-block">
-						Margin note that clarifies some detail #main-content-block for intro section.
+						
 		    </div>
 		</div>
 
-		<div class="content-margin-container" id="does_x_do_y">
+		<div class="content-margin-container" id="background">
 				<div class="margin-left-block">
 				</div>
 		    <div class="main-content-block">
-					<h1>Does X do Y?</h1>
-				  It is well known that Y does Y. And this has raised the question does X do Y? Because if Y does Y then it stands to reason that X does Y.
-          But we cannot answer this until we realize the Z implies Y and X can be linked to Z.<br><br>
+					<h1>Background</h1>
+				Transformers have revolutionized sequence modelling becoming the industry standard for many prediciton tasks. The strength of this architecture comes from implementing the attention mechanisms, which is able to process global information efficiently by focusing only on the signal that is most salient for task at hand. In our context, we are interested in a particular kind of attention based on the idea of queries, keys and vlaues. In query-key-value attention, each token is associated with a query vector, a key vector, and a value vector. We have then that for a token t: <br><br>
 
-          Now let's write some math!<br>
+          
           <center>
-            <math xmlns="http://www.w3.org/1998/Math/MathML">
-              <mrow>
-                <mrow>
-                  <mo>&#x2202;</mo>
-                  <mi>y</mi>
-                </mrow>
-                <mo>/</mo>
-                <mrow>
-                  <mo>&#x2202;</mo>
-                  <mi>x</mi>
-                </mrow>
-              </mrow>
-              <mo>=</mo>
-              <mi>x</mi>
-            </math>
+			<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+				<mrow>
+				  <mi>q</mi>
+				  <mo>=</mo>
+				  <msub>
+					<mi>W</mi>
+					<mi>q</mi>
+				  </msub>
+				  <mi>t</mi>
+				</mrow>
+			  </math>
+			  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+				<mrow>
+				  <mi>k</mi>
+				  <mo>=</mo>
+				  <msub>
+					<mi>W</mi>
+					<mi>k</mi>
+				  </msub>
+				  <mi>t</mi>
+				</mrow>
+			  </math>
+			  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+				<mrow>
+				  <mi>v</mi>
+				  <mo>=</mo>
+				  <msub>
+					<mi>W</mi>
+					<mi>v</mi>
+				  </msub>
+				  <mi>t</mi>
+				</mrow>
+			  </math>  
           </center>
           <br>
-          It's probably best to ask an LLM to help do the web
-          formatting for math. You can tell it "convert this latex equation into MathML: $$\frac{\partial dy}{\partial dx} = x$$"
-          But it took me a few tries. So, if you get frustrated, you can embed an image of the equation, or use other packages for
-          rendering equations on webpages.
+          Every token will then submit a query vector which will then be compared to to the keys vector via a measure of similarity (dot product) <br><br>
+		  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+			<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+				<mrow>
+				  <mi>s</mi>
+				  <mo>=</mo>
+				  <mfenced open=&#x5B; close=&#x5D;>
+					<mrow>
+						<mo>[</mo>
+						<mi>s</mi>
+						<msub>
+							<mi></mi>
+							<mn>1</mn>
+						</msub>
+					  <mo>,</mo>
+					  <mo>&#x2026;</mo>
+					  <mo>,</mo>
+						<mi>s</mi>
+						<msub>
+							<mi></mi>
+							<mn>N</mn>
+						</msub>
+					  <mo>]</mo>
+					</mrow>
+				  </mfenced>
+				  <msup>
+					<mo></mo>
+					<mo>T</mo>
+				  </msup>
+				  <mo>=</mo>
+				  <mfenced open="[" close="]">
+					<mrow>
+					  <mfenced open="[" close="]">
+						<mtext>[</mtext>
+						<mrow>
+							<mi>q</mi>
+							<msup>
+								<mi></mi>
+								<mtext>T</mtext>
+							</msup>
+							<msub>
+								<mi></mi>
+								<mtext>input</mtext>
+							</msub>
+					
+						  <msub>
+							<mi>k</mi>
+							<mn>1</mn>
+						  </msub>
+						</mrow>
+					  </mfenced>
+					  <mo>,</mo>
+					  <mo>&#x2026;</mo>
+					  <mo>,</mo>
+					  <mfenced open="[" close="]">
+						<mrow>
+						  <msub>
+							<msup>
+								<mi>q</mi>
+								<mtext>T</mtext>
+							</msup>
+							<mtext>input</mtext>
+						  </msub>
+						  <msub>
+							<mi>k</mi>
+							<mi>N</mi>
+						  </msub>
+						</mrow>
+					  </mfenced>
+					</mrow>
+				  </mfenced>
+				  <mtext>]</mtext>
+				  <msup>
+					<mo></mo>
+					<mo>T</mo>
+				  </msup>
+				</mrow>
+			  </math>
+
+			We then normalize the vector of similarities with a softmax and weight the value matrix using the attention weights (rescaled similarities)
+
+			<br><br>
+			  
 		    </div>
-		    <div class="margin-right-block" style="transform: translate(0%, -100%);"> <!-- you can move the margin notes up and down with translate -->
-          Interestingly, Plato also asked if X does Y, in <a href="#ref_1">[1]</a>.
+
+
+		    <div class="margin-right-block" style="transform: translate(0%, -50%);"> <!-- you can move the margin notes up and down with translate -->
+          Adapted from lecture notes on Transformers architecture <a href="#ref_1">[1]</a>.
 		    </div>
 		</div>
 
