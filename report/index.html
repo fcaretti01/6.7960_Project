@@ -293,14 +293,16 @@
 		</div>
 
 		<div class="content-margin-container" id="background">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-					<h1>Background</h1>
-				Transformers have revolutionized sequence modelling becoming the industry standard for many prediciton tasks. The strength of this architecture comes from implementing the attention mechanisms, which is able to process global information efficiently by focusing only on the signal that is most salient for task at hand. In our context, we are interested in a particular kind of attention based on the idea of queries, keys and vlaues. In query-key-value attention, each token is associated with a query vector, a key vector, and a value vector. We have then that for a token t: <br><br>
+			<div class="margin-left-block">
+			</div>
+		<div class="main-content-block">
+				<h1>Background</h1>
+			Transformers have revolutionized sequence modeling, becoming the industry standard for many prediction tasks. Their strength lies in their ability to process global information efficiently, focusing only on the most relevant signals for a given task through attention mechanisms. At the heart of this architecture is the self-attention mechanism, which allows each token in a sequence to dynamically determine its relationship with all other tokens. 
 
-          
-          <center>
+			A core building block of self-attention is the concept of queries, keys, and values. Each token in the input sequence is transformed into three vectors: a query vector, a key vector, and a value vector. These are computed as follows for a token \( t \):
+			<br><br>
+	  
+			<center>
 			<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
 				<mrow>
 				  <mi>q</mi>
@@ -334,98 +336,251 @@
 				  <mi>t</mi>
 				</mrow>
 			  </math>  
-          </center>
-          <br>
-          Every token will then submit a query vector which will then be compared to to the keys vector via a measure of similarity (dot product) <br><br>
-		  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+			</center>
+			<br>
+
+			The query vector represents the "question" a token asks about the sequence, while the key vectors encode the "context" or "relevance" of other tokens. The values represent the information each token contributes. To compute self-attention, the query of a token is compared against the keys of all tokens in the sequence using a similarity measure (dot product). This produces a vector of attention scores:
+			<br><br>
+
 			<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
 				<mrow>
 				  <mi>s</mi>
 				  <mo>=</mo>
-				  <mfenced open=&#x5B; close=&#x5D;>
-					<mrow>
-						<mo>[</mo>
-						<mi>s</mi>
-						<msub>
-							<mi></mi>
-							<mn>1</mn>
-						</msub>
-					  <mo>,</mo>
-					  <mo>&#x2026;</mo>
-					  <mo>,</mo>
-						<mi>s</mi>
-						<msub>
-							<mi></mi>
-							<mn>N</mn>
-						</msub>
-					  <mo>]</mo>
-					</mrow>
-				  </mfenced>
-				  <msup>
-					<mo></mo>
-					<mo>T</mo>
-				  </msup>
-				  <mo>=</mo>
 				  <mfenced open="[" close="]">
 					<mrow>
-					  <mfenced open="[" close="]">
-						<mtext>[</mtext>
-						<mrow>
-							<mi>q</mi>
-							<msup>
-								<mi></mi>
-								<mtext>T</mtext>
-							</msup>
-							<msub>
-								<mi></mi>
-								<mtext>input</mtext>
-							</msub>
-					
-						  <msub>
-							<mi>k</mi>
-							<mn>1</mn>
-						  </msub>
-						</mrow>
-					  </mfenced>
-					  <mo>,</mo>
-					  <mo>&#x2026;</mo>
-					  <mo>,</mo>
-					  <mfenced open="[" close="]">
-						<mrow>
-						  <msub>
-							<msup>
-								<mi>q</mi>
-								<mtext>T</mtext>
-							</msup>
-							<mtext>input</mtext>
-						  </msub>
-						  <msub>
-							<mi>k</mi>
-							<mi>N</mi>
-						  </msub>
-						</mrow>
-					  </mfenced>
+					  <mi>q</mi>
+					  <msup>
+						<mi>k</mi>
+						<mo>T</mo>
+					  </msup>
 					</mrow>
 				  </mfenced>
-				  <mtext>]</mtext>
-				  <msup>
-					<mo></mo>
-					<mo>T</mo>
-				  </msup>
+				</mrow>
+			</math>
+			<br>
+
+			These attention scores are then normalized using a softmax function, converting them into probabilities that indicate the relative importance of each token:
+			<br><br>
+
+			<center>
+				<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+				<mrow>
+				  <mi>a</mi>
+				  <mo>=</mo>
+				  <mi>softmax</mi>
+				  <mo>(</mo>
+				  <mi>s</mi>
+				  <mo>)</mo>
 				</mrow>
 			  </math>
+			  <br><br>
+			  <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+				<mrow>
+				  <mi>output</mi>
+				  <mo>=</mo>
+				  <mi>a</mi>
+				  <mi>v</mi>
+				</mrow>
+			  </math>
+			</center>
+			<br>
 
-			We then normalize the vector of similarities with a softmax and weight the value matrix using the attention weights (rescaled similarities)
+			The self-attention mechanism combines the values weighted by their attention probabilities, producing an output vector for each token that incorporates information from the entire sequence. This approach allows the model to capture both local and global dependencies, which is particularly powerful for tasks like machine translation and time-series prediction.
 
-			<br><br>
-			  
-		    </div>
+			Unlike traditional sequence models like recurrent neural networks (RNNs), self-attention does not impose a sequential constraint. Instead, it enables direct access to all tokens simultaneously, making it more efficient for parallel computation and better at handling long-range dependencies.
 
-
-		    <div class="margin-right-block" style="transform: translate(0%, -50%);"> <!-- you can move the margin notes up and down with translate -->
-          Adapted from lecture notes on Transformers architecture <a href="#ref_1">[1]</a>.
-		    </div>
+			In the following sections, we will explore how these principles underpin transformer architectures like GPT-2, focusing on their applications to complex prediction tasks in financial time series analysis.
 		</div>
+		<div class="margin-right-block" style="transform: translate(0%, -100%);"> <!-- you can move the margin notes up and down with translate -->
+			Adapted from lecture notes on Transformers architecture <a href="#ref_1">[1]</a>.
+		</div>
+		</div>
+		<div class="content-margin-container" id="GPT2">
+			<div class="margin-left-block"></div>
+			<div class="main-content-block">
+				<h4>GPT-2 Architecture</h4>
+
+			For the prediction task we are trying to analyze we chose GPT-2 architecture, which builds upon the self-attention mechanism with a stack of transformer decoder blocks. Each block consists of the following key components:
+
+			<ol>
+				<li>
+					<b>Masked Self-Attention:</b> GPT-2 uses masked self-attention to ensure that predictions for a token depend only on the tokens that precede it. This masking is achieved by setting the attention weights to zero for future tokens.
+				</li>
+				<li>
+					<b>Feedforward Neural Network (FFN):</b> Each attention block is followed by a position-wise fully connected feedforward network with non-linear activation functions (ReLU or GELU). This component helps in learning complex mappings.
+				</li>
+				<li>
+					<b>Layer Normalization:</b> Layer normalization is applied before the attention and feedforward layers, improving training stability and convergence.
+				</li>
+				<li>
+					<b>Residual Connections:</b> Residual connections around each sub-layer (attention and feedforward) allow the model to effectively propagate gradients during training.
+				</li>
+			</ol>
+
+			The input to GPT-2 is first embedded into a high-dimensional space using a token embedding layer and a positional encoding to provide the model with information about the order of tokens in the sequence. The embeddings are then passed through the stack of decoder blocks.
+
+			<h4>GPT-2 for Autoregressive Prediction</h4>
+
+			GPT-2 is trained in an autoregressive manner, predicting the next token in the sequence given all previous tokens. This is achieved by minimizing the negative log-likelihood of the predicted tokens during training. The model's autoregressive nature aligns well with financial time series prediction, where future values depend on past observations.
+
+			By using multiple attention heads in each self-attention layer, GPT-2 can attend to different aspects of the input sequence simultaneously. This multi-head attention mechanism enables the model to learn diverse representations that are crucial for capturing the nuances of high-frequency financial data.
+
+			In the next section, we will detail how we analyze the components of GPT-2 and their contribution to predictions in the context of financial time series data, utilizing the path patching framework inspired by Wang et al. (2022).
+		    
+			</div>
+			<div class="margin-right-block" style="transform: translate(0%, -10%);"> 
+				CITE HERE GPT-2 PAPER <a href="www.example.com">link</a>
+			</div>
+		</div>
+	
+
+			
+		<div class="content-margin-container" id="task">
+			<div class="margin-left-block"></div>
+			<div class="main-content-block">
+				<h1>Task definition</h1><p>
+					We address an autoregressive prediction problem in the context of intraday financial markets. The objective is to predict the sign of the return 
+					(<math xmlns="http://www.w3.org/1998/Math/MathML">
+						<mrow>
+							<mo>{</mo>
+							<mn>1</mn>
+							<mo>,</mo>
+							<mn>0</mn>
+							<mo>,</mo>
+							<mo>-</mo>
+							<mn>1</mn>
+							<mo>}</mo>
+						</mrow>
+					</math>)
+					for 30-minute intervals using a set of lagged input features. The task is framed as a three-class classification problem. To facilitate this, 
+					we construct a comprehensive set of technical indicators derived from historical data, including log returns, volatility, and trading volume, 
+					along with their lagged values. These features serve as the predictive inputs to the model. Below, we provide a schematic visualization of the input 
+					representation and the prediction task.
+				</p>
+				<p>
+					Below a visual representation of our model, where <b>X</b>, <b>Y</b>, <b>Z</b> are <i>(T x 1)</i> vectors, where <i>T</i> is our lookback period.
+				</p>
+				<center>
+					<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+
+						<!-- Connections -->
+						<line x1="170" y1="150" x2="300" y2="150" stroke="gray" stroke-width="2" />
+						<line x1="170" y1="250" x2="300" y2="250" stroke="gray" stroke-width="2" />
+						<line x1="170" y1="350" x2="300" y2="350" stroke="gray" stroke-width="2" />
+				
+						<line x1="450" y1="150" x2="650" y2="250" stroke="gray" stroke-width="2" />
+						<line x1="450" y1="250" x2="650" y2="250" stroke="gray" stroke-width="2" />
+						<line x1="450" y1="350" x2="650" y2="250" stroke="gray" stroke-width="2" />
+						
+						<!-- Title -->
+						<text x="290" y="30" font-size="18" font-family="Arial">Autoregressive Prediction</text>
+						
+						<!-- Input Layer -->
+						<text x="70" y="100" font-size="16" font-family="Arial">Input Layer (Features)</text>
+						
+						<!-- Input Nodes -->
+						<circle cx="150" cy="150" r="20" fill="lightgreen" />
+						<text x="150" y="150" font-size="20" font-family="Arial" text-anchor="middle" dy=".3em">
+							<tspan font-weight="bold">X</tspan>
+						</text>
+				
+						<circle cx="150" cy="250" r="20" fill="lightgreen" />
+						<text x="150" y="250" font-size="20" font-family="Arial" text-anchor="middle" dy=".3em">
+							<tspan font-weight="bold">Y</tspan>
+						</text>
+				
+						<circle cx="150" cy="350" r="20" fill="lightgreen" />
+						<text x="150" y="350" font-size="20" font-family="Arial" text-anchor="middle" dy=".3em">
+							<tspan font-weight="bold">Z</tspan>
+						</text>
+						
+						<!-- GPT-2 Block -->
+						<text x="275" y="100" font-size="16" font-family="Arial">Network (GPT-2 based architecture)</text>
+						<rect x="300" y="120" width="150" height="300" fill="#d9e8ff" stroke="black" />
+						<text x="375" y="270" font-size="14" font-family="Arial" text-anchor="middle">Network</text>
+						
+						<!-- Output Layer -->
+						<text x="600" y="100" font-size="16" font-family="Arial">Output Layer</text>
+						
+						<!-- Output Node -->
+						<circle cx="650" cy="250" r="20" fill="lightcoral" />
+						<text x="650" y="250" font-size="20" font-weight="bold" font-family="Arial" text-anchor="middle" dy=".3em">Prediction</text>
+						
+
+					</svg>
+				</center>
+				<p>
+					To implement our model, we adopted the <em>GPT-2 architecture</em>, tailored to the requirements of our autoregressive prediction task. Specifically, we initialized our model to accept input features shaped as 
+					<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">
+						<mi>(B, T, N)</mi>
+					</math>, 
+					where 
+					<em>B</em> represents the batch size, 
+					<em>T</em> denotes the lookback period 
+					(<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>43</mn></math>, corresponding to three days of intraday data), 
+					and <em>N</em> specifies the number of feature dimensions 
+					(<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>3</mn></math>, including lagged values of volatility, log returns, and volume).
+				</p>
+				<p>
+					The input features were first processed through an <em>embedding layer</em> that projected the raw data into a higher-dimensional space, enabling the model to capture more intricate patterns in the data. To incorporate temporal information, a 
+					<em>positional embedding layer</em> was added to encode the sequential nature of the time series, ensuring that the model could differentiate between input tokens based on their relative positions.
+				</p>
+				<p>
+					The core of the network consists of three stacked <em>self-attention blocks</em>, adhering to the principles of the GPT-2 architecture. Each block includes:
+					<ul>
+						<li>A <em>multi-head self-attention mechanism</em> to capture dependencies across all lagged input features.</li>
+						<li>A fully connected <em>feedforward network (MLP)</em> to process intermediate representations.</li>
+						<li><em>Residual connections</em> with layer normalization to facilitate gradient flow and improve model stability during training.</li>
+					</ul>
+					These components work synergistically to extract meaningful relationships and patterns from the input data.
+				</p>
+				<p>
+					In the final stage, the output of the self-attention blocks is passed through a <em>decoding layer</em> designed for classification. The decoder transforms the processed representations into predictions corresponding to one of the three target classes 
+					(<math xmlns="http://www.w3.org/1998/Math/MathML" display="inline">{<mn>1</mn>, <mn>0</mn>, <mn>-1</mn>}</math>), 
+					representing the sign of the return. This setup ensures that the model is well-suited for the autoregressive classification task, leveraging the strengths of the GPT-2 architecture for financial time series data.
+				</p>
+				<p>
+					Below the visualization of the initialized model:
+				</p>
+				<img src="./images/GPT-2 Architecture.png" width=512px/>
+			</div>
+			<div class="margin-right-block" style="transform: translate(0%, -10%);">
+				REFERENCE HERE <a href="www.example.com">link</a>
+			</div>
+		</div>
+
+		<!-- NETWORK ANALYSIS PART  -->
+		<div class="content-margin-container" id="network_analysis">
+			<div class="margin-left-block"></div>
+			<div class="main-content-block">
+				<h1><p>Network Analysis</p></h1>
+				<p>
+					<strong>Understanding Transformer Mechanics: Mean Ablation and Attention Studies</strong>
+				  </p>
+				
+				  <p>
+					Having defined the model we aim to train, the next step involves delving into its inner workings to make the model more interpretable and human-comprehensible. Our approach draws inspiration from the work of Wang et al. (2022), which introduces a mechanistic framework for understanding neural networks. One of the key concepts proposed is the <em>hook</em>. A hook is a dummy <code>nn.Module</code> that operates as a passthrough immediately after every activation function in the model, returning the identity of the data it processes. These hooks are instrumental in caching and analyzing the activations at various points in the model, particularly within attention layers, as well as conducting ablation studies.
+				  </p>
+				
+				  <p>
+					In our experiments, we leverage hooks to silence the outputs of attention heads selectively, aiming to identify which heads most significantly influence the model's predictions. This process employs a technique called <strong>mean ablation</strong>, where the output of a single head is replaced with its mean value. By iteratively deactivating different attention heads and observing changes in the loss, we can quantify the relative importance of each head. The comparison between loss variations enables us to rank heads in terms of their contribution to the prediction process.
+				  </p>
+				
+				  <p>
+					After identifying the most influential heads, we analyze their outputs to determine the temporal dependencies the model emphasizes. This allows us to uncover which time steps the model focuses on most heavily during its predictions. Such insights not only improve our understanding of the model's decision-making process but also provide a pathway to refine its interpretability and trustworthiness.
+				  </p>
+				
+				  <!-- Placeholder for chart showing head importance rankings -->
+				  <div style="border: 1px dashed #ccc; padding: 20px; margin: 20px 0; text-align: center;">
+					<em>[Insert chart: Head importance rankings based on loss changes]</em>
+				  </div>
+				
+				  <!-- Placeholder for visualization of temporal dependencies -->
+			</div>
+			<div class="margin-right-block"></div>
+		</div>
+
+
 
 		<div class="content-margin-container">
 				<div class="margin-left-block">
