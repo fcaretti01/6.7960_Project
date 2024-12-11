@@ -434,7 +434,7 @@
 		    
 			</div>
 			<div class="margin-right-block" style="transform: translate(0%, -10%);"> 
-				CITE HERE GPT-2 PAPER <a href="www.example.com">link</a>
+				link to paper <a href="#papergpt2">[3]</a>
 			</div>
 		</div>
 	
@@ -550,7 +550,6 @@
 				<img src="./images/GPT-2 Architecture.png" width=512px/>
 			</div>
 			<div class="margin-right-block" style="transform: translate(0%, -10%);">
-				REFERENCE HERE <a href="www.example.com">link</a>
 			</div>
 		</div>
 
@@ -561,7 +560,7 @@
 				<h1><p>Network Analysis</p></h1>
 				
 				  <p>
-					Having defined the model we aim to train, the next step involves delving into its inner workings to make the model more interpretable and human-comprehensible. Our approach draws inspiration from the work of Wang et al. (2022), which introduces a mechanistic framework for understanding neural networks. One of the key concepts proposed is the <em>hook</em>. A hook is a dummy <code>nn.Module</code> that operates as a passthrough immediately after every activation function in the model, returning the identity of the data it processes. These hooks are instrumental in caching and analyzing the activations at various points in the model, particularly within attention layers, as well as conducting ablation studies.
+					Having defined the model we aim to train, the next step involves delving into its inner workings to make the model more interpretable and human-comprehensible. Our approach draws inspiration from the work of Wang et al. (2022), which introduces a mechanistic framework for understanding neural networks. One of the key concepts proposed is the <em>hookpoint</em>. A hookpoint is a custom pytorch <code>nn.Module</code> that operates as a passthrough immediately after every activation function in the model, returning the identity of the data it processes, implementing either forward or backward hooks. These hooks are instrumental in caching and analyzing the activations at various points in the model, particularly within attention layers, as well as conducting ablation studies.
 				  </p>
 				
 				  <p>
@@ -599,13 +598,15 @@
 				
 				  <h4>3. Model Training</h4>
 				  <p>
-					We performed training on <b>2</b> different models. The first one smaller, the second one a bit bigger. They trained for long and hard, and have become the better versions of themselves.
+					With the data preprocessed and prepared, we initialized our model based on the architecture outlined above, aiming to elucidate the focus of transformers in a time-series scenario such as the one described. Training was conducted on two distinct models, differing only in that the second model featured an increased dimensionality of weight parameters and an additional attention head (instead of 4). This adjustment was 
+					intended to enhance the model's predictive capacity and yield more insightful results. Both models were trained on the MIT High-Performance Computing Cluster, iterating over the training dataset for 20 epochs with a learning rate of <code>1 x 10<sup>-4</sup></code>.
 				  </p>
 				
 				  <h4>4. Network Analysis</h4>
 				  <p>
-					Talk ABOUT MODEL TRAINING
+					For the network analysis phase, we employed a mean ablation technique to investigate the contributions of individual attention heads within the transformer architecture. By selectively silencing the output of specific heads, we measured the percentage increase in loss to quantify their importance to the model's predictions. This approach allowed us to identify which heads were most critical for the model's performance, offering valuable insights into how the transformer processes time-series data.
 				  </p>
+				
 			</div>
 			<div class="margin-right-block"></div>
 		</div>>
@@ -630,7 +631,7 @@
 				<p>
 					Below the heat map for the second model
 				</p>
-				<img src="./images/H4L1_second_pattern_model2.gif" alt="Animated GIF Example" style="width: 725px;">
+				<img src="./images/H4L1_second_pattern_model2.gif" alt="Animated GIF Example" style="width: 1000px;">
 				<br>
 				<p>
 					Comment
@@ -655,7 +656,7 @@
 				<p>
 					<h5>Description</h5>
 				</p>
-				<img src="./images/H2L1-chess_pattern_only in model1.gif" alt="Animated GIF Example" style="width: 725px;">
+				<img src="./images/H2L1-chess_pattern_only in model1.gif" alt="Animated GIF Example" style="width: 1000px;">
 				<br>
 				<p>
 					Comment
@@ -663,9 +664,9 @@
 				<br><br>
 				<h4> Intra-day Dynamics Head</h4>
 				<p>
-					Below the heat map for the second model
+					Below the heat map for the second model <a href="#img5">View Image</a>
 				</p>
-				<img src="./images/5.png" width=512px/>
+				<img id="img5" src="./images/5.png" width="512px">
 				<br>
 				<p>
 					Comment
@@ -681,7 +682,7 @@
 				<p>
 					Below the heat map for the second model
 				</p>
-				<img src="./images/avg model2 H2L3 second pattern.gif" alt="Animated GIF Example" style="width: 725px;">
+				<img src="./images/avg model2 H2L3 second pattern.gif" alt="Animated GIF Example" style="width: 1000px;">
 				<br>
 				<p>
 					Comment
@@ -714,10 +715,14 @@
 							Redwood Research, UC Berkeley
 							<br>
 
-							
 							<a href="https://arxiv.org/abs/2202.05262">[2] </a>Kevin Meng, David Bau, Alex Andonian, Yonatan Belinkov. 
 								*Locating and Editing Factual Associations in GPT*. 
-								Submitted on 10 Feb 2022 (v1), last revised 13 Jan 2023 (this version, v5).<br><br>
+								Submitted on 10 Feb 2022 (v1), last revised 13 Jan 2023 (this version, v5).
+
+							<p id="papergpt2">
+							<a href="https://arxiv.org/pdf/2009.04968">[3]</a>Montesinos, D. M. (2020). Modern methods of text generation. National Research University Higher School of Economics, Moscow, Russia.
+							</p>
+							<br><br>
 						</div>
 		    </div>	
 		    <div class="margin-right-block">
