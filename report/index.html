@@ -263,6 +263,11 @@
 			<b style="font-size:16px">Outline</b><br><br>
 			<a href="#intro">Introduction</a><br><br>
 			<a href="#background">Background</a><br><br>
+			<a href="#gpt2">GPT-2 Architecture</a><br><br>
+			<a href="#task">Task Definition</a><br><br>
+			<a href="#net_analysis">Network Analysis</a><br><br>
+			<a href="#implementation">Implementation</a><br><br>
+			<a href="#results">Results</a><br><br>
 			<a href="#implications_and_limitations">Implications and limitations</a><br><br>
 		</div>
 			</div>
@@ -395,7 +400,7 @@
 			Adapted from lecture notes on Transformers architecture <a href="#ref_1">[1]</a>.
 		</div>
 		</div>
-		<div class="content-margin-container" id="GPT2">
+		<div class="content-margin-container" id="gpt2">
 			<div class="margin-left-block"></div>
 			<div class="main-content-block">
 				<h4>GPT-2 Architecture</h4>
@@ -550,13 +555,10 @@
 		</div>
 
 		<!-- NETWORK ANALYSIS PART  -->
-		<div class="content-margin-container" id="network_analysis">
+		<div class="content-margin-container" id="net_analysis">
 			<div class="margin-left-block"></div>
 			<div class="main-content-block">
 				<h1><p>Network Analysis</p></h1>
-				<p>
-					<strong>Understanding Transformer Mechanics: Mean Ablation and Attention Studies</strong>
-				  </p>
 				
 				  <p>
 					Having defined the model we aim to train, the next step involves delving into its inner workings to make the model more interpretable and human-comprehensible. Our approach draws inspiration from the work of Wang et al. (2022), which introduces a mechanistic framework for understanding neural networks. One of the key concepts proposed is the <em>hook</em>. A hook is a dummy <code>nn.Module</code> that operates as a passthrough immediately after every activation function in the model, returning the identity of the data it processes. These hooks are instrumental in caching and analyzing the activations at various points in the model, particularly within attention layers, as well as conducting ablation studies.
@@ -574,7 +576,7 @@
 			<div class="margin-right-block"></div>
 		</div>
 
-		<div class="content-margin-container" id="Implementation">
+		<div class="content-margin-container" id="implementation">
 			<div class="margin-left-block"></div>
 			<div class="main-content-block">
 				<h1> Implementation </h1>
@@ -582,7 +584,7 @@
 					We structured our implementation by dividing the process into four key steps: <b>1) Data Collection & Preparation</b>; <b>3) Model Training</b>; and <b>4) Network Analysis</b>.
 				  </p>
 				
-				  <h3>1. Data Collection & Preparation</h3>
+				  <h4>1. Data Collection & Preparation</h4>
 				  <p>
 					In the initial phase, we sourced financial data from <a href="https://polygon.io" target="_blank">Polygon.io</a> by developing a bespoke API. This enabled us to retrieve comprehensive information on all U.S. stocks with 30-minute interval data spanning over five years. The high-resolution dataset provides a robust foundation for subsequent analysis and modeling. 
 				  </p>
@@ -595,12 +597,12 @@
 					thereby maintaining the chronological integrity necessary for time-series analysis. This division established the foundation for model training and validation in subsequent stages.
 				  </p>
 				
-				  <h3>3. Model Training</h3>
+				  <h4>3. Model Training</h4>
 				  <p>
 					Talk about model training
 				  </p>
 				
-				  <h3>4. Network Analysis</h3>
+				  <h4>4. Network Analysis</h4>
 				  <p>
 					Talk ABOUT MODEL TRAINING
 				  </p>
@@ -609,13 +611,41 @@
 		</div>>
 
 
-		<div class="content-margin-container" id="result">
+		<div class="content-margin-container" id="results">
 			<div class="margin-left-block"></div>
 			<div class="main-content-block">
 				<h1>Results</h1>
 				<p>
 					Following our network analysis proceess, 2 main results come to right.
 				</p>
+
+				<h4> SMALL MODEL</h4>
+				<p>
+					Below the heat map for the first model
+				</p>
+				<img src="./images/heat_1.png" width=512px/>
+				<br>
+				<p>
+					Comment
+				</p>
+				<p>
+					Below the importance for the first model
+				</p>
+				<img src="./images/importance_1.png" width=512px/>
+				<br><br>
+				<h4> BIG MODEL</h4>
+				<p>
+					Below the heat map for the second model
+				</p>
+				<img src="./images/heat_2.png" width=512px/>
+				<br>
+				<p>
+					Comment
+				</p>
+				<p>
+					Below the importance for the first model
+				</p>
+				<img src="./images/importance_2.png" width=512px/>
 			</div>
 			<div class="margin-right-block"></div>
 		</div>>
