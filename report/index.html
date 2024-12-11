@@ -570,16 +570,65 @@
 					After identifying the most influential heads, we analyze their outputs to determine the temporal dependencies the model emphasizes. This allows us to uncover which time steps the model focuses on most heavily during its predictions. Such insights not only improve our understanding of the model's decision-making process but also provide a pathway to refine its interpretability and trustworthiness.
 				  </p>
 				
-				  <!-- Placeholder for chart showing head importance rankings -->
-				  <div style="border: 1px dashed #ccc; padding: 20px; margin: 20px 0; text-align: center;">
-					<em>[Insert chart: Head importance rankings based on loss changes]</em>
-				  </div>
-				
-				  <!-- Placeholder for visualization of temporal dependencies -->
 			</div>
 			<div class="margin-right-block"></div>
 		</div>
 
+		<div class="content-margin-container" id="Implementation">
+			<div class="margin-left-block"></div>
+			<div class="main-content-block">
+				<h1> Implementation </h1>
+				<p>
+					We structured our implementation by dividing the process into four key steps: <b>1) Data Collection & Preparation</b>; <b>3) Model Training</b>; and <b>4) Network Analysis</b>.
+				  </p>
+				
+				  <h3>1. Data Collection & Preparation</h3>
+				  <p>
+					In the initial phase, we sourced financial data from <a href="https://polygon.io" target="_blank">Polygon.io</a> by developing a bespoke API. This enabled us to retrieve comprehensive information on all U.S. stocks with 30-minute interval data spanning over five years. The high-resolution dataset provides a robust foundation for subsequent analysis and modeling. 
+				  </p>
+				  <p>
+					Following data extraction, we implemented a series of rigorous data cleaning procedures to address potential issues that could adversely affect model training in subsequent phases. These procedures included the removal of missing values and duplicate entries, as well as the handling of outliers. Missing values were systematically addressed using interpolation techniques, 
+					while duplicates were eliminated to maintain dataset integrity. Subsequently, we enriched the dataset by constructing additional features derived from the securities' price movements. Feature engineering focused 
+					on key financial metrics such as logarithmic returns, rolling volatilities, and price-volume relationships. These features were selected due to their relevance in capturing temporal and cross-sectional patterns in the data. While the scope of feature engineering was constrained by time limitations, the chosen features provided a robust foundation for predictive modeling. 
+					In preparing the dataset for model training, we structured the data into a format suitable for time-series classification tasks. Specifically, each sample in the training dataset was designed as an entry with the shape (<i>T</i>, <i>d</i> ), where <i>T</i> represents the temporal dimension and <i>d</i> denotes the number of features engineered. This configuration ensured
+					that the model could effectively leverage both the temporal dynamics and the feature relationships present in the data. Finally, the dataset was partitioned into training and testing subsets to facilitate model evaluation. The temporal structure of the data was preserved during splitting to ensure that the test set consisted of future data relative to the training set, 
+					thereby maintaining the chronological integrity necessary for time-series analysis. This division established the foundation for model training and validation in subsequent stages.
+				  </p>
+				
+				  <h3>3. Model Training</h3>
+				  <p>
+					Talk about model training
+				  </p>
+				
+				  <h3>4. Network Analysis</h3>
+				  <p>
+					Talk ABOUT MODEL TRAINING
+				  </p>
+			</div>
+			<div class="margin-right-block"></div>
+		</div>>
+
+
+		<div class="content-margin-container" id="result">
+			<div class="margin-left-block"></div>
+			<div class="main-content-block">
+				<h1>Results</h1>
+				<p>
+					Following our network analysis proceess, 2 main results come to right.
+				</p>
+			</div>
+			<div class="margin-right-block"></div>
+		</div>>
+
+
+		<!-- Conclusion -->
+		<div class="content-margin-container" id="conclusion">
+			<div class="margin-left-block"></div>
+			<div class="main-content-block">
+				<h1>Conclusion</h1>
+			</div>
+			<div class="margin-right-block"></div>
+		</div>
 
 
 		<div class="content-margin-container">
@@ -597,16 +646,7 @@
 		    </div>
 		</div>
 
-		<div class="content-margin-container" id="implications_and_limitations">
-				<div class="margin-left-block">
-				</div>
-		    <div class="main-content-block">
-						<h1>Implications and limitations</h1>
-						Let's end with some discussion of the implications and limitations.
-		    </div>
-		    <div class="margin-right-block">
-		    </div>
-		</div>
+
 
 		<div class="content-margin-container" id="citations">
 				<div class="margin-left-block">
