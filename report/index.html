@@ -617,76 +617,49 @@
 			<div class="main-content-block">
 				<h1>Results</h1>
 				<p>
-					Following our network analysis proceess, 2 main results come to right.
+					We train two variants of the Time Series GPT2-mini model, one with model dimensions of 20 and a 5 dimensional subspace per attention head with 4 attention heads per layer (“small” model), and the other having model dimensionality of 50 (we project each 5-dimensional input token of the input sequence onto a 50-dimensional latent space before initiating the series of Attention layers) and 5 attention heads per layer (“large” model), both of which with a total of 3 attention layers. 
+					After training, we carry out the mean ablation studies for each model independently as described above and analyze the head importance defined as the percentage decrease in accuracy when mean ablating each specific head with respect to the baseline model accuracy on a test set. Once we identify the most relevant attention heads that the learned model hinges upon the most for making its predictions we proceed in analyzing the patterns described by such heads via their attention activations on the test set.
+					Below we report, in turn, the two main categories of heads we are able to detect with our ablation + attention activation study across the different layers of the model.
+					Overall we find, among all heads across the three layers of both networks, that there exist two attention heads that carry the most influence in terms of generating accurate predictions, the first being in the first layer and the second in the third layer of both models. In both models, the relevant head sitting in the first layer of the network consistently focuses, at each time step, on the tokens corresponding to the same time of the day in the previous days, thus paying attention to the time-consistent patterns that repeat across days at regular times. We deem such head the “Time Persistence Head”, capturing a longer-term time-stationary behavior of our series. The second relevant head, located in the third and final attention layer of both the smaller and the larger networks, instead focuses on the most recent past observations at each time step, thus elaborating more short-term intra-day dynamics. We define such head as an “Intra-Day Dynamics Head”.
 				</p>
+				
+				<img src="./images/heat_1.png" width=512px/>
+				<img src="./images/heat_2.png" width=512px/>
+				<h4>Sum of head importances small model </h4>
+				<img src="./images/importance_1.png" width=512px/>
+				<h4>Sum of head importances big model </h4>
+				<img src="./images/importance_2.png" width=512px/>
+				<br><br>
 				<h4>Time Persistence Head</h4>
 				<p>
-					Below the heat map for the first model
+					The <b>Time Persistence Head</b> is represented by the fourth head and by the second head in the larger and smaller GPT models respectively, both situated in the first layer of the network. As we can see from figure <a href="#img1">1</a> (larger model) and <a href="#img4">4</a> (smaller model), and especially for the larger model’s head, the attention weights are strongly biased towards a regular pattern that attends to the tokens situated at exactly 14 steps prior to the current token which, in our case of a trading day of 7 hours and thus 14 30min-interval time steps corresponds to an observation realized at exactly the same time of the day in the previous day/s. As the token reaches the end of the sequence, and thus observations for the same time become available not just for the previous day but also for two days prior, we see that the head progressively attends backward in time, always at 14-time steps increments. This indicates that the first high-level feature captured by the model as our sequence enters the network is one that relates to recurring patterns at the same time of the day across trading days, i.e., information that relates to a longer-term possibly mean reverting or trend following behavior of our sequence across days. This is overall one of the strongest structural pattern identified in both networks, which can be seen by the dynamic visualization <a href="#imdim1">gif 1</a> of the top 10 attended tokens for each token in our sequence in the animation below.
 				</p>
-				<img src="./images/1.png" width=512px/>
+				<img id="img1" src="./images/1.png" width=512px/>
 				<br>
-				<p>
-					Comment
-				</p>
-				<p>
-					Below the heat map for the second model
-				</p>
-				<img src="./images/H4L1_second_pattern_model2.gif" alt="Animated GIF Example" style="width: 1000px;">
+				<img id="imdim1" src="./images/H4L1_second_pattern_model2.gif" alt="Animated GIF Example" style="width: 725px;">
 				<br>
-				<p>
-					Comment
-				</p>
-				<p>
-					Below the importance for the first model
-				</p>
-				<img src="./images/2.png" width=512px/>
+				<img id="img2" src="./images/2.png" width=512px/>
 				<br><br>
 				<p>
-					Below the heat map for the second model
+					Despite the strength of this attention pattern, however, we saw that for the smaller model this systematic backtracking behavior was hard to achieve, arguably due to the lower dimensional subspace onto which attention operations are carried out by each head, which made it hard to dynamically identify the relevant time steps for each token position, let alone extract information from observations too-far distanced in the past. We therefore see another function emerging in the Time Persistence Head of the smaller model, which is identifying and paying attention to the end-of-day tokens for each time step, irrespectively of where the query time step is located relative to the end-of-day token <a href="#img3">3</a>. In essence, finding and attending to the end-of-day token helps to pin down the absolute time position of each token in the given day, thus playing a similar role of the dynamic Time Persistence Head in capturing repeating behaviors through days at the same time of the day.
+					Given the lower model dimensionality of the smaller network, we find that this end-of-day anchoring <a href="#imdim2">gif 2</a> is extremely useful for predictions, as we find it present in many other attention heads and layers beside the Time Persistence Head of the first layer <a href="#img4">4</a>. As this rather strong pattern almost completely disappears in the second, larger model, we attribute this function as one that makes up for the model expressivity and dimensionality needed to capture the time persistent behavior that we find in <a href="#img1">1</a>.
 				</p>
-				<img src="./images/3.png" width=512px/>
+				<img id="img3" src="./images/3.png" width=512px/>
 				<br>
-				<p>
-					Comment
-				</p>
-				<p>
-					Below the importance for the first model
-				</p>
-				<img src="./images/4.png" width=512px/>
-				<p>
-					<h5>Description</h5>
-				</p>
-				<img src="./images/H2L1-chess_pattern_only in model1.gif" alt="Animated GIF Example" style="width: 1000px;">
+				<img id="img4" src="./images/4.png" width=512px/>
+				<img id="imdim2" src="./images/H2L1-chess_pattern_only in model1.gif" alt="Animated GIF Example" style="width: 725px;">
 				<br>
-				<p>
-					Comment
-				</p>
 				<br><br>
 				<h4> Intra-day Dynamics Head</h4>
 				<p>
-					Below the heat map for the second model <a href="#img5">View Image</a>
+					The Intra-Day Dynamics Head instead tightly focuses on the past observations closest in time to the current token, thus at all times paying attention to the intra-day behavior of our series. This structure is consistent from the smaller <a href="#img5">5</a> to the larger model <a href="#img6">6</a>, even though the attention pattern of the head in the larger model more strongly focuses on intra-day observations while excluding the end-of-day time steps. This is associated to a more effective behavior of this head since excluding the end-of-day observations, which in the majority of cases correspond to zero returns due to absence of trading (and thus not meaningful information), helps the head focus on more meaningful information unveiled throughout the other time steps of the day. By contrast, the smaller model’s head doesn’t show this behavior and thus uniformly attends to end-of-day observations as well including them in the intra-day dynamics. Both models’ heads show a scheme of progressively decreasing attention weights as the time steps get further back in time relative to the current query token, thus corroborating the hypothesis that such heads are focusing on the latest dynamics with potentially decaying impact in time <a href="#imdim3">gif 3</a>.
 				</p>
-				<img id="img5" src="./images/5.png" width="512px">
+				<img id="img5" src="./images/5.png" width=512px/>
 				<br>
-				<p>
-					Comment
-				</p>
-				<p>
-					Below the heat map for the second model
-				</p>
-				<img src="./images/6.png" width=512px/>
+				<img id="img6" src="./images/6.png" width=512px/>
 				<br>
-				<p>
-					Comment
-				</p>
-				<p>
-					Below the heat map for the second model
-				</p>
-				<img src="./images/avg model2 H2L3 second pattern.gif" alt="Animated GIF Example" style="width: 1000px;">
+				<img id="imdim3" src="./images/avg model2 H2L3 second pattern.gif" alt="Animated GIF Example" style="width: 725px;">
 				<br>
-				<p>
-					Comment
-				</p>
 			</div>
 			<div class="margin-right-block"></div>
 		</div>>
@@ -697,6 +670,15 @@
 			<div class="margin-left-block"></div>
 			<div class="main-content-block">
 				<h1>Conclusion</h1>
+				<p>
+					This study overall investigates and sheds light on the behavior of multi-head attention in a Transformer Decoder model applied to a time-series setting. In addition, our empirical results present information on the role of dimensionality of the vector subspace onto which we project our input tokens and apply attention operations for each head. Through our mean ablation experiments on the activation of each attention head in each layer of our models we identified two main classes of heads dominating both the smaller and the larger of the trained models. These are a Time Persistence Head, focusing on the same times of the day in previous days and thus capturing longer-term dynamics of our sequence, and an Intra-Day Dynamics Head, focusing on the more recent time observations available at any given point in time and thus providing information on short-term  dynamics of our sequence. They are respectively located in the first and third layer of our networks, suggesting, in line and analogy with the interpretation of depth in computer vision models, that earlier layers (and heads) focus on the extraction of higher-level features while later layers in the network refine the representation of each input in its detail, which in our time series setting turn out to be intra-day details or information.
+					These results are significant in that, to our knowledge, no previous study analyzed the behavior of multi-head self-attention mechanics on high-frequency time series settings, and they thus inform us on the information processing capabilities of the attention technology also on the time series domain, with a particular importance of attention head specialization paving the way for more interpretability studies.
+					The second important finding is the relevance of the dimensionality of the latent space onto which attention operations are carried out, with a higher dimensionality crucially extending the model’s expressivity and its ability to capture more detailed and potentially dynamically changing patterns. This is represented by the two patterns highlighted above being significantly strengthened when the trained model goes from a dimensionality of 5 to one of 10 for the key, query, and value vectors.
+				</p>
+				<p>	
+					Further studies could interestingly focus on investigating the role of other modules of the transformer architecture, most notably pointwise MLPs, which in NLP domains have been shown to encode the majority of the knowledge stored and retrieved by Large Language Models during inference. In addition looking at the impact of network might also be interesting, as new patterns might arise as the complexity of model scales.
+					It would thus be interesting to understand which analogies might be present in the time series setting.
+				</p>
 			</div>
 			<div class="margin-right-block"></div>
 		</div>
